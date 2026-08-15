@@ -135,47 +135,48 @@ export function TransactionsPage() {
         <Field label="Tipo">
           <Select
             value={type}
-            onChange={(event) => {
-              setType(event.target.value);
+            onValueChange={(next) => {
+              setType(next);
               setPage(1);
             }}
-          >
-            <option value="">Todos</option>
-            <option value="INCOME">Entrada</option>
-            <option value="EXPENSE">Saída</option>
-          </Select>
+            options={[
+              { value: "", label: "Todos" },
+              { value: "INCOME", label: "Entrada" },
+              { value: "EXPENSE", label: "Saída" },
+            ]}
+          />
         </Field>
         <Field label="Categoria">
           <Select
             value={categoryId}
-            onChange={(event) => {
-              setCategoryId(event.target.value);
+            onValueChange={(next) => {
+              setCategoryId(next);
               setPage(1);
             }}
-          >
-            <option value="">Todas</option>
-            {categories.map((category) => (
-              <option key={category.id} value={category.id}>
-                {category.title}
-              </option>
-            ))}
-          </Select>
+            options={[
+              { value: "", label: "Todas" },
+              ...categories.map((category) => ({
+                value: category.id,
+                label: category.title,
+              })),
+            ]}
+          />
         </Field>
         <Field label="Período">
           <Select
             value={period}
-            onChange={(event) => {
-              setPeriod(event.target.value);
+            onValueChange={(next) => {
+              setPeriod(next);
               setPage(1);
             }}
-          >
-            <option value="">Todos</option>
-            {periodOptions.map((option) => (
-              <option key={option.value} value={option.value}>
-                {option.label}
-              </option>
-            ))}
-          </Select>
+            options={[
+              { value: "", label: "Todos" },
+              ...periodOptions.map((option) => ({
+                value: option.value,
+                label: option.label,
+              })),
+            ]}
+          />
         </Field>
       </div>
 

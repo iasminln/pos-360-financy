@@ -195,14 +195,18 @@ export function TransactionModal({
           htmlFor="categoryId"
           error={errors.categoryId?.message}
         >
-          <Select id="categoryId" {...register("categoryId")}>
-            <option value="">Selecione</option>
-            {categories.map((category) => (
-              <option key={category.id} value={category.id}>
-                {category.title}
-              </option>
-            ))}
-          </Select>
+          <Select
+            id="categoryId"
+            value={watch("categoryId")}
+            onValueChange={(next) =>
+              setValue("categoryId", next, { shouldValidate: true })
+            }
+            placeholder="Selecione"
+            options={categories.map((category) => ({
+              value: category.id,
+              label: category.title,
+            }))}
+          />
         </Field>
 
         {submitError && <p className="text-sm text-danger">{submitError}</p>}
