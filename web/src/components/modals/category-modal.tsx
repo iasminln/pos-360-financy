@@ -160,7 +160,7 @@ export function CategoryModal({ open, onClose, category }: Props) {
                   type="button"
                   onClick={() => setValue("icon", icon)}
                   className={cn(
-                    "flex h-10 w-10 items-center justify-center rounded-lg border",
+                    "flex h-10 w-10 items-center justify-center rounded-lg cursor-pointer border",
                     selectedIcon === icon
                       ? "border-brand-base text-brand-base"
                       : "border-border text-gray-600",
@@ -177,21 +177,30 @@ export function CategoryModal({ open, onClose, category }: Props) {
         <div>
           <p className="mb-2 text-sm font-medium text-gray-700">Cor</p>
           <div className="flex flex-wrap gap-2">
-            {CATEGORY_COLORS.map((color) => (
-              <button
-                key={color.id}
-                type="button"
-                onClick={() => setValue("color", color.id)}
-                className={cn(
-                  "h-7 w-12 rounded-lg border-2",
-                  selectedColor === color.id
-                    ? "border-gray-800"
-                    : "border-transparent",
-                )}
-                style={{ backgroundColor: color.value }}
-                aria-label={color.id}
-              />
-            ))}
+            {CATEGORY_COLORS.map((color) => {
+              const isSelected = selectedColor === color.id;
+              return (
+                <button
+                  key={color.id}
+                  type="button"
+                  onClick={() => setValue("color", color.id)}
+                  className={cn(
+                    "rounded-lg cursor-pointer border bg-white p-1 transition-colors",
+                    !isSelected && "border-border",
+                  )}
+                  style={
+                    isSelected ? { borderColor: color.text } : undefined
+                  }
+                  aria-label={color.id}
+                  aria-pressed={isSelected}
+                >
+                  <span
+                    className="block h-5 w-9 rounded-md"
+                    style={{ backgroundColor: color.value }}
+                  />
+                </button>
+              );
+            })}
           </div>
           <input type="hidden" {...register("color")} />
         </div>

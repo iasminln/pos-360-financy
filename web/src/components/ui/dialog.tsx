@@ -45,7 +45,7 @@ export function Dialog({
           <button
             type="button"
             onClick={onClose}
-            className="p-1.5 text-gray-400 border border-gray-300 rounded-lg hover:bg-gray-100 hover:text-gray-600"
+            className="p-1.5 text-gray-400 cursor-pointer border border-gray-300 rounded-lg hover:bg-gray-100 hover:text-gray-600"
           >
             <X className="h-4 w-4 text-gray-700" />
           </button>
