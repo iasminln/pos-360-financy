@@ -16,7 +16,7 @@ import {
 import { useRefetchActiveQueries } from "@/hooks/use-refetch-active-queries";
 import { getErrorMessage } from "@/lib/errors";
 import type { Category, Transaction } from "@/lib/types";
-import { toDateInputValue } from "@/lib/format";
+import { dateInputToIso, toDateInputValue } from "@/lib/format";
 import { cn } from "@/lib/utils";
 
 const schema = z.object({
@@ -96,7 +96,7 @@ export function TransactionModal({
       description: values.description,
       amount: values.amount,
       type: values.type,
-      date: new Date(values.date).toISOString(),
+      date: dateInputToIso(values.date),
       categoryId: values.categoryId,
     };
 

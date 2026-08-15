@@ -6,6 +6,10 @@ import { typeDefs, resolvers } from "./schema/index.js";
 
 const port = Number(process.env.PORT || 4000);
 const corsOrigin = process.env.CORS_ORIGIN || "*";
+const allowedOrigins =
+  corsOrigin === "*"
+    ? null
+    : corsOrigin.split(",").map((origin) => origin.trim()).filter(Boolean);
 
 const yoga = createYoga({
   schema: createSchema({
@@ -13,12 +17,23 @@ const yoga = createYoga({
     resolvers,
   }),
   context: createContext,
-  cors: {
-    origin:
-      corsOrigin === "*"
-        ? true
-        : corsOrigin.split(",").map((origin) => origin.trim()),
-    credentials: true,
+  cors: (request) => {
+    const requestOrigin = request.headers.get("origin") ?? undefined;
+
+    if (!allowedOrigins) {
+      return {
+        origin: requestOrigin,
+        credentials: true,
+      };
+    }
+
+    return {
+      origin:
+        requestOrigin && allowedOrigins.includes(requestOrigin)
+          ? requestOrigin
+          : allowedOrigins,
+      credentials: true,
+    };
   },
   graphqlEndpoint: "/graphql",
 });

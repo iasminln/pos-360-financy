@@ -11,6 +11,7 @@ export function formatDate(value: string | Date) {
     day: "2-digit",
     month: "2-digit",
     year: "2-digit",
+    timeZone: "UTC",
   }).format(date);
 }
 
@@ -24,9 +25,21 @@ export function getInitials(name: string) {
 }
 
 export function toDateInputValue(value?: string | Date) {
-  const date = value ? new Date(value) : new Date();
-  const year = date.getFullYear();
-  const month = String(date.getMonth() + 1).padStart(2, "0");
-  const day = String(date.getDate()).padStart(2, "0");
+  if (!value) {
+    const now = new Date();
+    const year = now.getFullYear();
+    const month = String(now.getMonth() + 1).padStart(2, "0");
+    const day = String(now.getDate()).padStart(2, "0");
+    return `${year}-${month}-${day}`;
+  }
+
+  const date = typeof value === "string" ? new Date(value) : value;
+  const year = date.getUTCFullYear();
+  const month = String(date.getUTCMonth() + 1).padStart(2, "0");
+  const day = String(date.getUTCDate()).padStart(2, "0");
   return `${year}-${month}-${day}`;
+}
+
+export function dateInputToIso(value: string) {
+  return `${value}T00:00:00.000Z`;
 }

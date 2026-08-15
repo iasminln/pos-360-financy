@@ -98,8 +98,8 @@ async function getOwnedTransaction(
 }
 
 function monthRange(month: number, year: number) {
-  const start = new Date(year, month - 1, 1);
-  const end = new Date(year, month, 1);
+  const start = new Date(Date.UTC(year, month - 1, 1));
+  const end = new Date(Date.UTC(year, month, 1));
   return { start, end };
 }
 
