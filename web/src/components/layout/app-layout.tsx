@@ -6,8 +6,8 @@ import { cn } from "@/lib/utils";
 
 const links = [
   { to: "/", label: "Dashboard", end: true },
-  { to: "/transactions", label: "Transações" },
-  { to: "/categories", label: "Categorias" },
+  { to: "/transacoes", label: "Transações" },
+  { to: "/categorias", label: "Categorias" },
 ];
 
 export function AppLayout() {
@@ -35,7 +35,7 @@ export function AppLayout() {
               </NavLink>
             ))}
           </nav>
-          <Link to="/profile" className="rounded-full">
+          <Link to="/perfil" className="rounded-full">
             <Avatar name={user?.name ?? "U"} size="sm" />
           </Link>
         </div>

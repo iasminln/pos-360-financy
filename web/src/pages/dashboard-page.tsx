@@ -58,7 +58,7 @@ export function DashboardPage() {
             <h2 className="text-xs font-semibold tracking-wide text-gray-500">
               TRANSAÇÕES RECENTES
             </h2>
-            <Link to="/transactions" className="flex items-center gap-1 text-sm font-medium text-brand-base">
+            <Link to="/transacoes" className="flex items-center gap-1 text-sm font-medium text-brand-base">
               Ver todas <ChevronRight className="h-4 w-4" />
             </Link>
           </div>
@@ -90,7 +90,7 @@ export function DashboardPage() {
             <h2 className="text-xs font-semibold tracking-wide text-gray-500">
               CATEGORIAS
             </h2>
-            <Link to="/categories" className="flex items-center gap-1 text-sm font-medium text-brand-base">
+            <Link to="/categorias" className="flex items-center gap-1 text-sm font-medium text-brand-base">
               Gerenciar <ChevronRight className="h-4 w-4" />
             </Link>
           </div>
