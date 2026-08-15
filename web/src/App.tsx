@@ -1,5 +1,6 @@
 import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
 import { AppLayout } from "@/components/layout/app-layout";
+import { BootLoadingScreen } from "@/components/layout/boot-loading-screen";
 import { ProtectedRoute } from "@/components/layout/protected-route";
 import { useAuth } from "@/context/auth-context";
 import { LoginPage } from "@/pages/login-page";
@@ -8,16 +9,13 @@ import { DashboardPage } from "@/pages/dashboard-page";
 import { TransactionsPage } from "@/pages/transactions-page";
 import { CategoriesPage } from "@/pages/categories-page";
 import { ProfilePage } from "@/pages/profile-page";
+import { NotFoundPage } from "@/pages/not-found-page";
 
 function RootPage() {
   const { isAuthenticated, loading } = useAuth();
 
   if (loading) {
-    return (
-      <div className="flex min-h-screen items-center justify-center text-gray-500">
-        Carregando...
-      </div>
-    );
+    return <BootLoadingScreen />;
   }
 
   if (!isAuthenticated) {
@@ -32,11 +30,7 @@ function RootPage() {
 function PublicOnly({ children }: { children: React.ReactNode }) {
   const { isAuthenticated, loading } = useAuth();
   if (loading) {
-    return (
-      <div className="flex min-h-screen items-center justify-center text-gray-500">
-        Carregando...
-      </div>
-    );
+    return <BootLoadingScreen />;
   }
   if (isAuthenticated) return <Navigate to="/" replace />;
   return children;
@@ -61,13 +55,13 @@ export function App() {
 
         <Route element={<ProtectedRoute />}>
           <Route element={<AppLayout />}>
-            <Route path="/transactions" element={<TransactionsPage />} />
-            <Route path="/categories" element={<CategoriesPage />} />
-            <Route path="/profile" element={<ProfilePage />} />
+            <Route path="/transacoes" element={<TransactionsPage />} />
+            <Route path="/categorias" element={<CategoriesPage />} />
+            <Route path="/perfil" element={<ProfilePage />} />
           </Route>
         </Route>
 
-        <Route path="*" element={<Navigate to="/" replace />} />
+        <Route path="*" element={<NotFoundPage />} />
       </Routes>
     </BrowserRouter>
   );
