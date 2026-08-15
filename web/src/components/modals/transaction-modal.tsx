@@ -1,9 +1,10 @@
 import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useMutation } from "@apollo/client/react";
-import { ArrowDownCircle, ArrowUpCircle } from "lucide-react";
+import { ArrowDownCircle, ArrowUpCircle, Plus } from "lucide-react";
 import { Dialog } from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
 import { Field } from "@/components/ui/field";
@@ -42,7 +43,9 @@ export function TransactionModal({
   categories,
   transaction,
 }: Props) {
+  const navigate = useNavigate();
   const isEditing = Boolean(transaction);
+  const hasCategories = categories.length > 0;
   const refetchActiveQueries = useRefetchActiveQueries();
   const [submitError, setSubmitError] = useState("");
   const {
@@ -64,6 +67,11 @@ export function TransactionModal({
   });
 
   const type = watch("type");
+
+  const goToCreateCategory = () => {
+    onClose();
+    navigate("/categorias", { state: { openCreateCategory: true } });
+  };
 
   useEffect(() => {
     if (!open) return;
@@ -130,7 +138,7 @@ export function TransactionModal({
             type="button"
             onClick={() => setValue("type", "EXPENSE")}
             className={cn(
-              "flex h-12 items-center justify-center gap-2 rounded-lg border text-sm font-medium",
+              "flex h-12 cursor-pointer items-center justify-center gap-2 rounded-lg border text-sm font-medium",
               type === "EXPENSE"
                 ? "border-danger text-danger"
                 : "border-border text-gray-700",
@@ -143,7 +151,7 @@ export function TransactionModal({
             type="button"
             onClick={() => setValue("type", "INCOME")}
             className={cn(
-              "flex h-12 items-center justify-center gap-2 rounded-lg border text-sm font-medium",
+              "flex h-12 cursor-pointer items-center justify-center gap-2 rounded-lg border text-sm font-medium",
               type === "INCOME"
                 ? "border-success text-success"
                 : "border-border text-gray-700",
@@ -190,28 +198,59 @@ export function TransactionModal({
           </Field>
         </div>
 
-        <Field
-          label="Categoria"
-          htmlFor="categoryId"
-          error={errors.categoryId?.message}
-        >
-          <Select
-            id="categoryId"
-            value={watch("categoryId")}
-            onValueChange={(next) =>
-              setValue("categoryId", next, { shouldValidate: true })
-            }
-            placeholder="Selecione"
-            options={categories.map((category) => ({
-              value: category.id,
-              label: category.title,
-            }))}
-          />
-        </Field>
+        {hasCategories ? (
+          <div className="space-y-2">
+            <Field
+              label="Categoria"
+              htmlFor="categoryId"
+              error={errors.categoryId?.message}
+            >
+              <Select
+                id="categoryId"
+                value={watch("categoryId")}
+                onValueChange={(next) =>
+                  setValue("categoryId", next, { shouldValidate: true })
+                }
+                placeholder="Selecione"
+                options={categories.map((category) => ({
+                  value: category.id,
+                  label: category.title,
+                }))}
+              />
+            </Field>
+            <button
+              type="button"
+              onClick={goToCreateCategory}
+              className="text-sm cursor-pointer font-medium text-brand-base transition-colors hover:text-brand-dark hover:underline"
+            >
+              Criar nova categoria
+            </button>
+          </div>
+        ) : (
+          <div className="space-y-2">
+            <p className="text-sm font-medium text-gray-700">Categoria</p>
+            <p className="text-sm text-gray-500">
+              Você ainda não tem categorias. Crie uma para continuar.
+            </p>
+            <Button
+              type="button"
+              variant="secondary"
+              size="lg"
+              onClick={goToCreateCategory}
+            >
+              <Plus className="h-4 w-4" />
+              Criar categoria
+            </Button>
+          </div>
+        )}
 
         {submitError && <p className="text-sm text-danger">{submitError}</p>}
 
-        <Button type="submit" size="lg" disabled={isSubmitting}>
+        <Button
+          type="submit"
+          size="lg"
+          disabled={isSubmitting || !hasCategories}
+        >
           {isSubmitting ? "Salvando..." : "Salvar"}
         </Button>
       </form>

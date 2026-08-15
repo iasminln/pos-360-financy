@@ -1,4 +1,5 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { useLocation, useNavigate } from "react-router-dom";
 import { useMutation, useQuery } from "@apollo/client/react";
 import { ArrowUpDown, SquarePen, Plus, Tag, Trash } from "lucide-react";
 import {
@@ -15,7 +16,13 @@ import { getCategoryIcon } from "@/lib/icons";
 import { useRefetchActiveQueries } from "@/hooks/use-refetch-active-queries";
 import { getErrorMessage } from "@/lib/errors";
 
+type CategoriesLocationState = {
+  openCreateCategory?: boolean;
+};
+
 export function CategoriesPage() {
+  const location = useLocation();
+  const navigate = useNavigate();
   const [modalOpen, setModalOpen] = useState(false);
   const [editing, setEditing] = useState<Category | null>(null);
   const refetchActiveQueries = useRefetchActiveQueries();
@@ -34,6 +41,15 @@ export function CategoriesPage() {
   const MostUsedIcon = mostUsed
     ? getCategoryIcon(mostUsed.icon)
     : Tag;
+
+  useEffect(() => {
+    const state = location.state as CategoriesLocationState | null;
+    if (!state?.openCreateCategory) return;
+
+    setEditing(null);
+    setModalOpen(true);
+    navigate(location.pathname, { replace: true, state: {} });
+  }, [location.pathname, location.state, navigate]);
 
   const openCreate = () => {
     setEditing(null);
