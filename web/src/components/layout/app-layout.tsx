@@ -1,6 +1,7 @@
 import { NavLink, Outlet, Link } from "react-router-dom";
 import { Logo } from "@/components/ui/logo";
 import { Avatar } from "@/components/ui/avatar";
+import { Footer } from "@/components/layout/footer";
 import { useAuth } from "@/context/auth-context";
 import { cn } from "@/lib/utils";
 
@@ -14,7 +15,7 @@ export function AppLayout() {
   const { user } = useAuth();
 
   return (
-    <div className="min-h-screen bg-gray-100">
+    <div className="flex min-h-screen flex-col bg-gray-100">
       <header className="border-b border-border bg-white">
         <div className="mx-auto flex h-16 max-w-6xl items-center justify-between px-4">
           <Logo />
@@ -27,7 +28,9 @@ export function AppLayout() {
                 className={({ isActive }) =>
                   cn(
                     "text-sm font-medium transition-colors",
-                    isActive ? "text-brand-base font-semibold" : "text-gray-500 hover:text-gray-800",
+                    isActive
+                      ? "font-semibold text-brand-base"
+                      : "text-gray-500 hover:text-gray-800",
                   )
                 }
               >
@@ -57,9 +60,10 @@ export function AppLayout() {
           ))}
         </nav>
       </header>
-      <main className="mx-auto max-w-6xl px-4 py-8">
+      <main className="mx-auto w-full max-w-6xl flex-1 px-4 py-8">
         <Outlet />
       </main>
+      <Footer />
     </div>
   );
 }
