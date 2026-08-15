@@ -260,10 +260,10 @@ export function TransactionsPage() {
                     <td className="px-4 py-3">
                       <div className="flex items-center gap-2">
                         <Button
-                          variant="outline"
+                          variant="danger"
                           size="icon"
                           onClick={() => handleDelete(transaction.id)}
-                          className="text-danger hover:bg-red-light"
+                          aria-label="Excluir transação"
                         >
                           <Trash2 className="h-4 w-4" />
                         </Button>
@@ -271,6 +271,7 @@ export function TransactionsPage() {
                           variant="outline"
                           size="icon"
                           onClick={() => openEdit(transaction)}
+                          aria-label="Editar transação"
                         >
                           <Pencil className="h-4 w-4" />
                         </Button>

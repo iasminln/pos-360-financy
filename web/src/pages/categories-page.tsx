@@ -133,20 +133,22 @@ export function CategoriesPage() {
             <div className="mb-4 flex items-start justify-between">
               <CategoryIconBox icon={category.icon} color={category.color} />
               <div className="flex gap-2">
-                <button
-                  type="button"
+                <Button
+                  variant="danger"
+                  size="icon"
                   onClick={() => handleDelete(category)}
-                  className="rounded-md p-2 text-danger border border-gray-300 hover:bg-red-light"
+                  aria-label="Excluir categoria"
                 >
                   <Trash className="h-4 w-4" />
-                </button>
-                <button
-                  type="button"
+                </Button>
+                <Button
+                  variant="outline"
+                  size="icon"
                   onClick={() => openEdit(category)}
-                  className="rounded-md p-2 border border-gray-300 text-gray-700 hover:bg-gray-100"
+                  aria-label="Editar categoria"
                 >
                   <SquarePen className="h-4 w-4" />
-                </button>
+                </Button>
               </div>
             </div>
             <h3 className="text-base font-semibold text-gray-800">
