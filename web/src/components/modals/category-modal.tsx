@@ -5,8 +5,8 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { useMutation } from "@apollo/client/react";
 import { Dialog } from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
+import { Field } from "@/components/ui/field";
 import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
 import {
   CREATE_CATEGORY_MUTATION,
   UPDATE_CATEGORY_MUTATION,
@@ -123,27 +123,29 @@ export function CategoryModal({ open, onClose, category }: Props) {
       description="Organize suas transações com categorias"
     >
       <form onSubmit={onSubmit} className="space-y-4">
-        <div>
-          <Label htmlFor="title">Título</Label>
+        <Field
+          label="Título"
+          htmlFor="title"
+          error={errors.title?.message}
+        >
           <Input
             id="title"
             placeholder="Ex. Alimentação"
             {...register("title")}
           />
-          {errors.title && (
-            <p className="mt-1 text-xs text-danger">{errors.title.message}</p>
-          )}
-        </div>
+        </Field>
 
-        <div>
-          <Label htmlFor="description">Descrição</Label>
+        <Field
+          label="Descrição"
+          htmlFor="description"
+          helper="Opcional"
+        >
           <Input
             id="description"
             placeholder="Descrição da categoria"
             {...register("description")}
           />
-          <p className="mt-1 text-xs text-gray-500">Opcional</p>
-        </div>
+        </Field>
 
         <div>
           <p className="mb-2 text-sm font-medium text-gray-700">

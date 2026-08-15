@@ -18,9 +18,9 @@ import {
 import type { Category, Transaction } from "@/lib/types";
 import { formatCurrency, formatDate } from "@/lib/format";
 import { Button } from "@/components/ui/button";
+import { Field } from "@/components/ui/field";
 import { Input } from "@/components/ui/input";
 import { Select } from "@/components/ui/select";
-import { Label } from "@/components/ui/label";
 import { CategoryBadge } from "@/components/ui/badge";
 import { CategoryIconBox } from "@/components/category-icon-box";
 import { TransactionModal } from "@/components/modals/transaction-modal";
@@ -121,8 +121,7 @@ export function TransactionsPage() {
       </div>
 
       <div className="grid gap-4 rounded-2xl border border-border bg-white p-4 md:grid-cols-4">
-        <div>
-          <Label>Buscar</Label>
+        <Field label="Buscar">
           <Input
             placeholder="Buscar por descrição"
             leftIcon={<Search className="h-4 w-4" />}
@@ -132,9 +131,8 @@ export function TransactionsPage() {
               setPage(1);
             }}
           />
-        </div>
-        <div>
-          <Label>Tipo</Label>
+        </Field>
+        <Field label="Tipo">
           <Select
             value={type}
             onChange={(event) => {
@@ -146,9 +144,8 @@ export function TransactionsPage() {
             <option value="INCOME">Entrada</option>
             <option value="EXPENSE">Saída</option>
           </Select>
-        </div>
-        <div>
-          <Label>Categoria</Label>
+        </Field>
+        <Field label="Categoria">
           <Select
             value={categoryId}
             onChange={(event) => {
@@ -163,9 +160,8 @@ export function TransactionsPage() {
               </option>
             ))}
           </Select>
-        </div>
-        <div>
-          <Label>Período</Label>
+        </Field>
+        <Field label="Período">
           <Select
             value={period}
             onChange={(event) => {
@@ -180,7 +176,7 @@ export function TransactionsPage() {
               </option>
             ))}
           </Select>
-        </div>
+        </Field>
       </div>
 
       <div className="overflow-hidden rounded-2xl border border-border bg-white">

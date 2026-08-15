@@ -7,8 +7,8 @@ import { useMutation } from "@apollo/client/react";
 import { Eye, EyeClosed, Lock, LogIn, Mail, User as UserIcon } from "lucide-react";
 import { CardInitial } from "@/components/layout/card-initial";
 import { Button } from "@/components/ui/button";
+import { Field } from "@/components/ui/field";
 import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
 import { REGISTER_MUTATION } from "@/graphql/operations";
 import { useAuth } from "@/context/auth-context";
 import { getErrorMessage } from "@/lib/errors";
@@ -60,21 +60,24 @@ export function RegisterPage() {
       subtitle="Comece a controlar suas finanças ainda hoje"
     >
       <form onSubmit={onSubmit} className="space-y-4">
-        <div>
-          <Label htmlFor="name">Nome completo</Label>
+        <Field
+          label="Nome completo"
+          htmlFor="name"
+          error={errors.name?.message}
+        >
           <Input
             id="name"
             placeholder="Seu nome completo"
             leftIcon={<UserIcon className="h-4 w-4" />}
             {...register("name")}
           />
-          {errors.name && (
-            <p className="mt-1 text-xs text-danger">{errors.name.message}</p>
-          )}
-        </div>
+        </Field>
 
-        <div>
-          <Label htmlFor="email">E-mail</Label>
+        <Field
+          label="E-mail"
+          htmlFor="email"
+          error={errors.email?.message}
+        >
           <Input
             id="email"
             type="email"
@@ -82,13 +85,14 @@ export function RegisterPage() {
             leftIcon={<Mail className="h-4 w-4" />}
             {...register("email")}
           />
-          {errors.email && (
-            <p className="mt-1 text-xs text-danger">{errors.email.message}</p>
-          )}
-        </div>
+        </Field>
 
-        <div>
-          <Label htmlFor="password">Senha</Label>
+        <Field
+          label="Senha"
+          htmlFor="password"
+          helper="A senha deve ter no mínimo 8 caracteres"
+          error={errors.password?.message}
+        >
           <Input
             id="password"
             type={showPassword ? "text" : "password"}
@@ -109,15 +113,7 @@ export function RegisterPage() {
             }
             {...register("password")}
           />
-          <p className="mt-1 text-xs text-gray-500">
-            A senha deve ter no mínimo 8 caracteres
-          </p>
-          {errors.password && (
-            <p className="mt-1 text-xs text-danger">
-              {errors.password.message}
-            </p>
-          )}
-        </div>
+        </Field>
 
         {error && <p className="text-sm text-danger">{error}</p>}
 

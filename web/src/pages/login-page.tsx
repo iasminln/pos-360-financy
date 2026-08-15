@@ -7,8 +7,8 @@ import { useMutation } from "@apollo/client/react";
 import { Eye, EyeClosed, Lock, Mail, UserPlus2 } from "lucide-react";
 import { CardInitial } from "@/components/layout/card-initial";
 import { Button } from "@/components/ui/button";
+import { Field } from "@/components/ui/field";
 import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
 import { LOGIN_MUTATION } from "@/graphql/operations";
 import { useAuth } from "@/context/auth-context";
 import { getErrorMessage } from "@/lib/errors";
@@ -71,8 +71,11 @@ export function LoginPage() {
       subtitle="Entre na sua conta para continuar"
     >
       <form onSubmit={onSubmit} className="space-y-4">
-        <div>
-          <Label htmlFor="email">E-mail</Label>
+        <Field
+          label="E-mail"
+          htmlFor="email"
+          error={errors.email?.message}
+        >
           <Input
             id="email"
             type="email"
@@ -80,13 +83,13 @@ export function LoginPage() {
             leftIcon={<Mail className="h-4 w-4" />}
             {...register("email")}
           />
-          {errors.email && (
-            <p className="mt-1 text-xs text-danger">{errors.email.message}</p>
-          )}
-        </div>
+        </Field>
 
-        <div>
-          <Label htmlFor="password">Senha</Label>
+        <Field
+          label="Senha"
+          htmlFor="password"
+          error={errors.password?.message}
+        >
           <Input
             id="password"
             type={showPassword ? "text" : "password"}
@@ -107,12 +110,7 @@ export function LoginPage() {
             }
             {...register("password")}
           />
-          {errors.password && (
-            <p className="mt-1 text-xs text-danger">
-              {errors.password.message}
-            </p>
-          )}
-        </div>
+        </Field>
 
         <div className="flex items-center justify-between text-sm">
           <label className="inline-flex items-center gap-2 text-gray-700">

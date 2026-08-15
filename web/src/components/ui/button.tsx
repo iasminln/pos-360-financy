@@ -16,7 +16,7 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
         ref={ref}
         type={type}
         className={cn(
-          "inline-flex items-center justify-center gap-2 rounded-lg font-medium transition-colors disabled:pointer-events-none disabled:opacity-60",
+          "inline-flex items-center justify-center gap-2 rounded-lg font-medium transition-colors cursor-pointer disabled:pointer-events-none disabled:opacity-60",
           variant === "primary" &&
             "bg-brand-base text-white hover:bg-brand-dark",
           variant === "secondary" &&

@@ -7,8 +7,8 @@ import { useMutation } from "@apollo/client/react";
 import { LogOut, Mail, User } from "lucide-react";
 import { Avatar } from "@/components/ui/avatar";
 import { Button } from "@/components/ui/button";
+import { Field } from "@/components/ui/field";
 import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
 import { UPDATE_PROFILE_MUTATION } from "@/graphql/operations";
 import { useAuth } from "@/context/auth-context";
 
@@ -78,30 +78,32 @@ export function ProfilePage() {
         <div className="mb-6 border-t border-border" />
 
         <form onSubmit={onSubmit} className="space-y-4">
-          <div>
-            <Label htmlFor="name">Nome completo</Label>
+          <Field
+            label="Nome completo"
+            htmlFor="name"
+            error={errors.name?.message}
+          >
             <Input
               id="name"
+              placeholder="Seu nome"
               leftIcon={<User className="h-4 w-4" />}
               {...register("name")}
             />
-            {errors.name && (
-              <p className="mt-1 text-xs text-danger">{errors.name.message}</p>
-            )}
-          </div>
+          </Field>
 
-          <div>
-            <Label htmlFor="email">E-mail</Label>
+          <Field
+            label="E-mail"
+            htmlFor="email"
+            helper="O e-mail não pode ser alterado"
+            disabled
+          >
             <Input
               id="email"
               value={user.email}
               disabled
               leftIcon={<Mail className="h-4 w-4" />}
             />
-            <p className="mt-1 text-xs text-gray-500">
-              O e-mail não pode ser alterado
-            </p>
-          </div>
+          </Field>
 
           {message && <p className="text-sm text-success">{message}</p>}
           {error && <p className="text-sm text-danger">{error}</p>}

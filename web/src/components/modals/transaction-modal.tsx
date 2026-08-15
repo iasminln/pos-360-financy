@@ -6,8 +6,8 @@ import { useMutation } from "@apollo/client/react";
 import { ArrowDownCircle, ArrowUpCircle } from "lucide-react";
 import { Dialog } from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
+import { Field } from "@/components/ui/field";
 import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
 import { Select } from "@/components/ui/select";
 import {
   CREATE_TRANSACTION_MUTATION,
@@ -154,30 +154,31 @@ export function TransactionModal({
           </button>
         </div>
 
-        <div>
-          <Label htmlFor="description">Descrição</Label>
+        <Field
+          label="Descrição"
+          htmlFor="description"
+          error={errors.description?.message}
+        >
           <Input
             id="description"
             placeholder="Ex. Almoço no restaurante"
             {...register("description")}
           />
-          {errors.description && (
-            <p className="mt-1 text-xs text-danger">
-              {errors.description.message}
-            </p>
-          )}
-        </div>
+        </Field>
 
         <div className="grid grid-cols-2 gap-3">
-          <div>
-            <Label htmlFor="date">Data</Label>
+          <Field
+            label="Data"
+            htmlFor="date"
+            error={errors.date?.message}
+          >
             <Input id="date" type="date" {...register("date")} />
-            {errors.date && (
-              <p className="mt-1 text-xs text-danger">{errors.date.message}</p>
-            )}
-          </div>
-          <div>
-            <Label htmlFor="amount">Valor</Label>
+          </Field>
+          <Field
+            label="Valor"
+            htmlFor="amount"
+            error={errors.amount?.message}
+          >
             <Input
               id="amount"
               type="number"
@@ -186,14 +187,14 @@ export function TransactionModal({
               placeholder="0,00"
               {...register("amount")}
             />
-            {errors.amount && (
-              <p className="mt-1 text-xs text-danger">{errors.amount.message}</p>
-            )}
-          </div>
+          </Field>
         </div>
 
-        <div>
-          <Label htmlFor="categoryId">Categoria</Label>
+        <Field
+          label="Categoria"
+          htmlFor="categoryId"
+          error={errors.categoryId?.message}
+        >
           <Select id="categoryId" {...register("categoryId")}>
             <option value="">Selecione</option>
             {categories.map((category) => (
@@ -202,12 +203,7 @@ export function TransactionModal({
               </option>
             ))}
           </Select>
-          {errors.categoryId && (
-            <p className="mt-1 text-xs text-danger">
-              {errors.categoryId.message}
-            </p>
-          )}
-        </div>
+        </Field>
 
         {submitError && <p className="text-sm text-danger">{submitError}</p>}
 
