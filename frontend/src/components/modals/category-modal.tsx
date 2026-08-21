@@ -151,7 +151,7 @@ export function CategoryModal({ open, onClose, category }: Props) {
           <p className="mb-2 text-sm font-medium text-gray-700">
             Ícone
           </p>
-          <div className="grid grid-cols-8 gap-2">
+          <div className="flex flex-wrap gap-2">
             {CATEGORY_ICONS.map((icon) => {
               const Icon = getCategoryIcon(icon);
               return (

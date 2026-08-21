@@ -15,7 +15,7 @@ export function CategoryIconBox({ icon, color, className }: Props) {
   return (
     <div
       className={cn(
-        "inline-flex h-10 w-10 items-center justify-center rounded-lg",
+        "inline-flex h-10 shrink-0 w-10 items-center justify-center rounded-lg",
         className,
       )}
       style={{ backgroundColor: palette.bg, color: palette.text }}

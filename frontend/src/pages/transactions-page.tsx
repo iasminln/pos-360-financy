@@ -221,7 +221,7 @@ export function TransactionsPage() {
                           icon={transaction.category.icon}
                           color={transaction.category.color}
                         />
-                        <span className="font-medium text-gray-800">
+                        <span className="font-medium text-gray-800 whitespace-nowrap">
                           {transaction.description}
                         </span>
                       </div>
@@ -250,7 +250,7 @@ export function TransactionsPage() {
                       </span>
                     </td>
                     <td
-                      className={`px-4 py-3 font-semibold ${
+                      className={`px-4 py-3 whitespace-nowrap font-semibold ${
                         isIncome ? "text-success" : "text-gray-800"
                       }`}
                     >
