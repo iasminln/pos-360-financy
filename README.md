@@ -12,7 +12,6 @@ Aplicação fullstack de gerenciamento de finanças com GraphQL.
 ```bash
 cd server
 cp .env.example .env
-# Preencha JWT_SECRET, DATABASE_URL (Neon Postgres) e CORS_ORIGIN
 npm install
 npx prisma migrate dev
 npm run dev
@@ -24,13 +23,10 @@ Variáveis (`server/.env.example`):
 
 ```
 JWT_SECRET=
-DATABASE_URL=
+DATABASE_URL="file:./dev.db"
 PORT=4000
-CORS_ORIGIN=
+CORS_ORIGIN=*
 ```
-
-`DATABASE_URL` deve ser a connection string do Neon (`postgresql://...`).
-`CORS_ORIGIN` em produção = URL do front na Vercel (ex.: `https://seu-app.vercel.app`).
 
 ## Frontend
 
@@ -48,5 +44,3 @@ Variáveis (`web/.env.example`):
 ```
 VITE_BACKEND_URL=
 ```
-
-Em produção na Vercel: `VITE_BACKEND_URL=https://seu-servico.onrender.com/graphql`
