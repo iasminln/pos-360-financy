@@ -4,13 +4,13 @@ Aplicação fullstack de gerenciamento de finanças com GraphQL.
 
 ## Estrutura
 
-- `server/` — API GraphQL (Yoga + Prisma + SQLite + JWT)
-- `web/` — Frontend React (Vite + Apollo Client + Tailwind)
+- `backend/` — API GraphQL (Yoga + Prisma + PostgreSQL/Neon + JWT)
+- `frontend/` — Frontend React (Vite + Apollo Client + Tailwind)
 
 ## Backend
 
 ```bash
-cd server
+cd backend
 cp .env.example .env
 # Preencha JWT_SECRET, DATABASE_URL (Neon Postgres) e CORS_ORIGIN
 npm install
@@ -20,7 +20,7 @@ npm run dev
 
 API em `http://localhost:4000/graphql`
 
-Variáveis (`server/.env.example`):
+Variáveis (`backend/.env.example`):
 
 ```
 JWT_SECRET=
@@ -35,7 +35,7 @@ CORS_ORIGIN=
 ## Frontend
 
 ```bash
-cd web
+cd frontend
 cp .env.example .env
 npm install
 npm run dev
@@ -43,7 +43,7 @@ npm run dev
 
 App em `http://localhost:5173`
 
-Variáveis (`web/.env.example`):
+Variáveis (`frontend/.env.example`):
 
 ```
 VITE_BACKEND_URL=
