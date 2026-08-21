@@ -12,6 +12,7 @@ import { Button } from "@/components/ui/button";
 import { CategoryBadge } from "@/components/ui/badge";
 import { CategoryIconBox } from "@/components/category-icon-box";
 import { CategoryModal } from "@/components/modals/category-modal";
+import { getCategoryColor } from "@/lib/categories";
 import { getCategoryIcon } from "@/lib/icons";
 import { useRefetchActiveQueries } from "@/hooks/use-refetch-active-queries";
 import { getErrorMessage } from "@/lib/errors";
@@ -38,9 +39,10 @@ export function CategoriesPage() {
   const categories = data?.categories ?? [];
   const dashboard = dashboardData?.dashboard;
   const mostUsed = dashboard?.mostUsedCategory;
-  const MostUsedIcon = mostUsed
-    ? getCategoryIcon(mostUsed.icon)
-    : Tag;
+  const MostUsedIcon = mostUsed ? getCategoryIcon(mostUsed.icon) : Tag;
+  const mostUsedColor = mostUsed
+    ? getCategoryColor(mostUsed.color).text
+    : undefined;
 
   useEffect(() => {
     const state = location.state as CategoriesLocationState | null;
@@ -118,7 +120,10 @@ export function CategoriesPage() {
           </p>
         </div>
         <div className="rounded-2xl border border-border bg-white p-5">
-          <div className="mb-3 inline-flex rounded-lg text-orange-base">
+          <div
+            className="mb-3 inline-flex rounded-lg text-gray-500"
+            style={mostUsedColor ? { color: mostUsedColor } : undefined}
+          >
             <MostUsedIcon className="h-6 w-6" />
           </div>
           <p className="text-2xl font-bold text-gray-800">
