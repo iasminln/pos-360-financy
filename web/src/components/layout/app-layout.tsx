@@ -1,7 +1,6 @@
 import { NavLink, Outlet, Link } from "react-router-dom";
 import { Logo } from "@/components/ui/logo";
 import { Avatar } from "@/components/ui/avatar";
-import { Footer } from "@/components/layout/footer";
 import { useAuth } from "@/context/auth-context";
 import { cn } from "@/lib/utils";
 
@@ -15,7 +14,7 @@ export function AppLayout() {
   const { user } = useAuth();
 
   return (
-    <div className="flex min-h-screen flex-col bg-gray-100">
+    <div className="flex flex-1 flex-col bg-gray-100">
       <header className="border-b border-border bg-white">
         <div className="mx-auto flex h-16 max-w-6xl items-center justify-between px-4">
           <Logo />
@@ -63,7 +62,6 @@ export function AppLayout() {
       <main className="mx-auto w-full max-w-6xl flex-1 px-4 py-8">
         <Outlet />
       </main>
-      <Footer />
     </div>
   );
 }

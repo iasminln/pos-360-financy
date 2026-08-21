@@ -1,6 +1,7 @@
 import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
 import { AppLayout } from "@/components/layout/app-layout";
 import { BootLoadingScreen } from "@/components/layout/boot-loading-screen";
+import { Footer } from "@/components/layout/footer";
 import { ProtectedRoute } from "@/components/layout/protected-route";
 import { useAuth } from "@/context/auth-context";
 import { LoginPage } from "@/pages/login-page";
@@ -22,9 +23,7 @@ function RootPage() {
     return <LoginPage />;
   }
 
-  return (
-    <AppLayout />
-  );
+  return <AppLayout />;
 }
 
 function PublicOnly({ children }: { children: React.ReactNode }) {
@@ -39,30 +38,35 @@ function PublicOnly({ children }: { children: React.ReactNode }) {
 export function App() {
   return (
     <BrowserRouter>
-      <Routes>
-        <Route path="/" element={<RootPage />}>
-          <Route index element={<DashboardPage />} />
-        </Route>
+      <div className="flex min-h-screen flex-col bg-gray-100">
+        <div className="flex flex-1 flex-col">
+          <Routes>
+            <Route path="/" element={<RootPage />}>
+              <Route index element={<DashboardPage />} />
+            </Route>
 
-        <Route
-          path="/register"
-          element={
-            <PublicOnly>
-              <RegisterPage />
-            </PublicOnly>
-          }
-        />
+            <Route
+              path="/register"
+              element={
+                <PublicOnly>
+                  <RegisterPage />
+                </PublicOnly>
+              }
+            />
 
-        <Route element={<ProtectedRoute />}>
-          <Route element={<AppLayout />}>
-            <Route path="/transacoes" element={<TransactionsPage />} />
-            <Route path="/categorias" element={<CategoriesPage />} />
-            <Route path="/perfil" element={<ProfilePage />} />
-          </Route>
-        </Route>
+            <Route element={<ProtectedRoute />}>
+              <Route element={<AppLayout />}>
+                <Route path="/transacoes" element={<TransactionsPage />} />
+                <Route path="/categorias" element={<CategoriesPage />} />
+                <Route path="/perfil" element={<ProfilePage />} />
+              </Route>
+            </Route>
 
-        <Route path="*" element={<NotFoundPage />} />
-      </Routes>
+            <Route path="*" element={<NotFoundPage />} />
+          </Routes>
+        </div>
+        <Footer />
+      </div>
     </BrowserRouter>
   );
 }
