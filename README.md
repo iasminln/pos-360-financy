@@ -2,9 +2,16 @@
 
 📌 Essa atividade foi publicada e pode ser visualizada em: [financy.iasmin.dev](https://financy.iasmin.dev/).
 
+**Dados de teste:**</br>
+**E-mail:** `teste@teste.com`</br>
+**Senha:** `admin123`</br>
+
+</br>
+
+**Stack de publicação:**</br>
 **Frontend:** Vercel</br>
 **Backend:** Render</br>
-**Danco de dados:** Neon Console</br>
+**Banco de dados:** Neon</br>
 
 </br>
 
