@@ -1,3 +1,15 @@
+# Atividade desenvolvida para Pós Gradução Full Stack da Rocketseat
+
+📌 Essa atividade foi publicada e pode ser visualizada em: [financy.iasmin.dev](https://financy.iasmin.dev/).
+
+**Frontend:** Vercel</br>
+**Backend:** Render</br>
+**Danco de dados:** Neon Console</br>
+
+</br>
+
+
+
 # Financy
 
 Aplicação fullstack de gerenciamento de finanças com GraphQL.
